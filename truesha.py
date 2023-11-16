@@ -3,21 +3,21 @@ import tkinter as tk
 from tkinter import simpledialog
 from decimal import *
 
-def mdp():
-    momdp = simpledialog.askstring("password", "enter the password. no accentuated letters:", show="*")
+def get_password():
+    password = simpledialog.askstring("password", "enter the password. no accentuated letters:", show="*")
    
-    if momdp:
+    if password:
         
-            binn = ""
-            ww= len(str(momdp))
-            strnb= (''.join(format(ord(char), '08b') for char in momdp)).zfill(448)
-            binn += bin(ww)[2:].zfill(64)
+            bin_len_password = ""
+            len_password= len(str(password))
+            bin_password= (''.join(format(ord(char), '08b') for char in password)).zfill(448)
+            bin_len_password += bin(len_password)[2:].zfill(64)
             
-            www=[]
-            www =strnb+binn
-            text = www
+            bin_password_list=[]
+            bin_password_list =bin_password+bin_len_password
+            text = bin_password_list
             chunk_size = 32
-            parts = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+            words = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
                   
             def rightrotate(arr, k):
                 if not arr:
@@ -26,37 +26,37 @@ def mdp():
                 return arr[-k:] + arr[:-k]  
             
             
-            fract=parts
-            def rotate():
+            fract=words
+            def rotation_one():
                 for i in range(0,15):
-                    my_list = parts[i]
-                    rotated_list = rightrotate(my_list, i+1)
-                    fract.append(rotated_list)
-            rotate()
+                    list_rotation_one = words[i]
+                    rotated_list_one = rightrotate(list_rotation_one, i+1)
+                    fract.append(rotated_list_one)
+            rotation_one()
             
             
-            def rotatwo():
+            def rotation_two():
                 for i in range(0,15):
-                    my_listt = parts[i]
-                    rotatad_list = rightrotate(my_listt, 3)
-                    fract.append(rotatad_list)
-            rotatwo()
+                    list_rotation_two = words[i]
+                    rotated_list_two = rightrotate(list_rotation_two, 3)
+                    fract.append(rotated_list_two)
+            rotation_two()
             
             
-            def rotathree():
+            def rotation_three():
                 for i in range(0,15):
-                    my_lisstt = parts[i]
-                    ratatad_list = rightrotate(my_lisstt, 1)
-                    fract.append(ratatad_list)
-            rotathree()
+                    list_rotation_three = words[i]
+                    rotated_list_three = rightrotate(list_rotation_three, 1)
+                    fract.append(rotated_list_three)
+            rotation_three()
             
             
-            def rotafour():
+            def rotation_four():
                 for i in range(12,15):
-                    my_llisstt = parts[i]
-                    megaratatad_list = rightrotate(my_llisstt, -2)
-                    fract.append(megaratatad_list)
-            rotafour()
+                    list_rotation_four = words[i]
+                    rotated_list_four = rightrotate(list_rotation_four, -2)
+                    fract.append(rotated_list_four)
+            rotation_four()
             
             
             
@@ -65,67 +65,67 @@ def mdp():
             
             
             
-            prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
+            primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
                     53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
                     109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 
                     173, 179, 181, 191, 193, 197, 199, 211, 223]
             
             
-            def squaree(i):
+            def squared(i):
                 return i**0.5
-            result= map(squaree, prime)  
-            resultt= (list(result))   
+            result= map(squared, primes)  
+            squareroot_primes= (list(result))   
             
             
             modulo=[]
-            def get_dec():
+            def decimals_squareroot_primes():
                 for i in range(1,48):
-                    decNum = resultt[i]
-                    frac = decNum % 1
-                    modulo.append(frac) 
-            get_dec()
+                    decNum = squareroot_primes[i]
+                    fract_part_primes = decNum % 1
+                    modulo.append(fract_part_primes) 
+            decimals_squareroot_primes()
             
             
-            def poww(n):
+            def raise_pow(n):
                 return n*(2**31)
-            pow = map(poww,modulo)
-            powpow = (list(pow))
+            apply_raise_pow = map(raise_pow,modulo)
+            list_pow = (list(apply_raise_pow))
             
             
-            def get_out(u):
+            def int_part_primes(u):
                 return int(u)
-            intt= map(get_out, powpow)
-            inttt = (list(intt))
+            apply_int_part_primes= map(int_part_primes, list_pow)
+            squareroot_primes_int = (list(apply_int_part_primes))
             
             
-            def bina(y):  
+            def convert_primes_bin(y):  
                 return bin(y)[2:]
-            binna=map(bina, inttt)
-            binar = (list(binna))
+            apply_convert_primes_bin=map(convert_primes_bin, squareroot_primes_int)
+            primes_bin = (list(apply_convert_primes_bin))
             
             
-            fractwo = []
-            def new():
+            fract_words = []
+            def new_words():
                 
                 for i in range (1,16):
                     r=fract[i]
-                    fractwo.append(r)
-            new()
+                    fract_words.append(r)
+            new_words()
             
             
-            primefract = []
-            def newp():
+            fract_primes = []
+            def new_primes():
                 for i in range (1,16):
-                    r=binar[i]
-                    primefract.append(r)       
-            newp()
+                    r=primes_bin[i]
+                    fract_primes.append(r)       
+            new_primes()
             
 
-            texxt = str(fractwo).replace("'", "").replace("[", "").replace("]", "").replace(",","").replace(" ", "")
+            texxt = str(fract_words).replace("'", "").replace("[", "").replace("]", "").replace(",","").replace(" ", "")
             chunk_sizee = 1
             partss = [texxt[i:i+chunk_sizee] for i in range(0, len(texxt), chunk_sizee)]
             
-            teexxt = str(primefract).replace("'", "").replace("[", "").replace("]", "").replace(",","").replace(" ", "")
+            teexxt = str(fract_primes).replace("'", "").replace("[", "").replace("]", "").replace(",","").replace(" ", "")
             partsss = [teexxt[i:i+chunk_sizee] for i in range(0, len(teexxt), chunk_sizee)]
             
             resuult = []
@@ -157,15 +157,15 @@ def mdp():
             
 
             #print(modulo)
-            #print("chunks:",(parts))  
-            #print("binary code:",(www))
-            print ("password:",(momdp))
+            #print("chunks:",(words))  
+            #print("binary code:",(bin_password_list))
+            print ("password:",(password))
             # print ('fract:', (fract))
-            #print ('binary:', (binar))
+            #print ('binary:', (primes_bin))
             print ('resuult:', (end))
-            #print ("frac", (hexaend))
+            #print ("fract_part_primes", (hexaend))
             #print ("primefrac", (partsss))
-            #print ("parts",(texxt))
+            #print ("words",(texxt))
             '''number_of_elements = len(fract)
             print("Number of elements in the list:", number_of_elements)'''
             
@@ -177,7 +177,7 @@ def mdp():
 
 panel= tk.Tk()
 panel.title("YOU SHALL NOT PASS")
-bouton = tk.Button(panel, text="password", command=mdp)
+bouton = tk.Button(panel, text="password", command=get_password)
 bouton.pack(padx=20, pady=20)
 panel.mainloop()
 
